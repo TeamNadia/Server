@@ -48,29 +48,35 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 				}
 			}
 			
+			$url = "";
 			$url = $videos[0];
 			
-			echo $url;
-			
-			$query	= "SELECT * FROM queue WHERE url = '$url'";
-			$result	= $mysqli->query($query);
-			if ($result->num_rows > 0)
+			if ($url == "")
 			{
-				$row = $result->fetch_array(MYSQLI_ASSOC);
-				$upvotes = (int) $row['upvotes'];
-				$upvotes++;
-				
-				$id = $row['id'];
-				
-				$query2 = "UPDATE queue SET upvotes = $upvotes WHERE id = $id";
-				$mysqli->query($query2);				
+				echo "URLFAIL";
 			}
 			else
 			{
-				$query2 = "INSERT INTO queue VALUES(NULL, $screen, $url, 1, NULL";
-				$mysqli->query($query2);
-			}
-			echo "SUCCESS";
+				$query	= "SELECT * FROM queue WHERE url = '$url'";
+				$result	= $mysqli->query($query);
+				if ($result->num_rows > 0)
+				{
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+					$upvotes = (int) $row['upvotes'];
+					$upvotes++;
+					
+					$id = $row['id'];
+					
+					$query2 = "UPDATE queue SET upvotes = $upvotes WHERE id = $id";
+					$mysqli->query($query2);				
+				}
+				else
+				{
+					$query2 = "INSERT INTO queue VALUES(NULL, $screen, $url, 1, NULL)";
+					$mysqli->query($query2);
+				}
+				echo "SUCCESS";
+			}			
 		}
 		else
 		{

@@ -1,6 +1,7 @@
 <?php
 require_once("include/config.inc.php");
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . '/google-api-php-client/src');
+require_once('Google/autoload.php');
 require_once('Google/Client.php');
 require_once('Google/Service/YouTube.php');
 

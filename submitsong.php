@@ -73,6 +73,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 				else
 				{
 					$query2 = "INSERT INTO queue VALUES (NULL, $screen, $url, 1, NULL)";
+					echo $query2;
 					$mysqli->query($query2);
 				}
 				echo "SUCCESS";

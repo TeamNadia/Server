@@ -51,9 +51,10 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 							$thisTrack .= " - " . $splitTitle[$i];
 					
 					$videos[] = array(
-						"url" => "https://youtube.com/watch?v=" . $searchresult['id']['videoId'],
-						"artist" => $splitTitle[0],
-						"track" => $thisTrack
+						"url"		=> "https://youtube.com/watch?v=" . $searchresult['id']['videoId'],
+						"artist" 	=> $splitTitle[0],
+						"track" 	=> $thisTrack,
+						"thumbnail"	=> $searchresult['snippet']['default']['url']
 					);
 				}
 			}
@@ -84,7 +85,8 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 				{
 					$artist = $mysqli->real_escape_string($videos[0]['artist']);
 					$track	= $mysqli->real_escape_string($videos[0]['track']);
-					$query2 = "INSERT INTO queue VALUES (NULL, $screen, '$artist', '$track', '$url', 1, NULL)";
+					$thumbnail = $mysqli->real_escape_string($videos[0]['thumbnail']);
+					$query2 = "INSERT INTO queue VALUES (NULL, $screen, '$artist', '$track', '$thumbnail', '$url', 1, NULL)";
 					$mysqli->query($query2);
 				}
 				echo "SUCCESS";

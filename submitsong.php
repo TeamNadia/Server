@@ -16,7 +16,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 	$screenresult = $mysqli->query($screenquery);
 	if ($screenresult->num_rows > 0)
 	{
-		$screenrow = $screenresult->fetch_array(MYSLI_ASSOC);
+		$screenrow = $screenresult->fetch_array(MYSQLI_ASSOC);
 		if ($screenrow['pin'] == $pin)
 		{
 			// Screen pin is ok, so go ahead and actually do some shit

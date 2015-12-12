@@ -62,12 +62,12 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 				if ($result->num_rows > 0)
 				{
 					$row = $result->fetch_array(MYSQLI_ASSOC);
-					$upvotes = (int) $row['upvotes'];
-					$upvotes++;
+					$votes = (int) $row['votes'];
+					$votes++;
 					
 					$id = $row['id'];
 					
-					$query2 = "UPDATE queue SET upvotes = $upvotes WHERE id = $id";
+					$query2 = "UPDATE queue SET votes = $votes WHERE id = $id";
 					$mysqli->query($query2);				
 				}
 				else

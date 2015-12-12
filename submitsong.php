@@ -50,6 +50,8 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 			
 			$url = $videos[0];
 			
+			echo $url;
+			
 			$query	= "SELECT * FROM queue WHERE url = '$url'";
 			$result	= $mysqli->query($query);
 			if ($result->num_rows > 0)

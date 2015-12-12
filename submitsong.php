@@ -44,12 +44,20 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 			{
 				if ($searchresult['id']['kind'] == 'youtube#video')
 				{
-					$videos[] = "https://youtube.com/watch?v=" . $searchresult['id']['videoId'];
+					$splitTitle = explode(" - ", $searchresult['snippet']['title']);
+					$thisTrack = $splitTitle[1];
+					if (count($splitTitle > 2))
+						for($i = 3; $i < count($splitTitle); $i++)
+							$thisTrack .= " - " . $splitTitle[$i];
+					
+					$videos[] = new array("url" => "https://youtube.com/watch?v=" . $searchresult['id']['videoId'],
+					"artist" => $splitTitle[0],
+					"track" => $thisTrack);
 				}
 			}
 			
 			$url = "";
-			$url = $mysqli->real_escape_string($videos[0]);
+			$url = $mysqli->real_escape_string($videos[0]['url']);
 			
 			if ($url == "")
 			{
@@ -72,7 +80,9 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 				}
 				else
 				{
-					$query2 = "INSERT INTO queue VALUES (NULL, $screen, '$url', 1, NULL)";
+					$artist = $mysqli->real_escape_string($videos[0]['artist']);
+					$track	= $mysqli->real_escape_string($videos[0]['track']);
+					$query2 = "INSERT INTO queue VALUES (NULL, $screen, '$artist', '$track', '$url', 1, NULL)";
 					$mysqli->query($query2);
 				}
 				echo "SUCCESS";

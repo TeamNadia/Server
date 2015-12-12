@@ -72,15 +72,15 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 		}
 		else
 		{
-			echo "FAIL";
+			echo "PINFAIL";
 		}
 	}
 	else
 	{
-		echo "FAIL";
+		echo "SCREENFAIL";
 	}
 }
 else
 {
-	echo "FAIL";
+	echo "NOTHINGFAIL";
 }

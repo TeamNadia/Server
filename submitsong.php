@@ -54,7 +54,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 						"url"		=> "https://youtube.com/watch?v=" . $searchresult['id']['videoId'],
 						"artist" 	=> $splitTitle[0],
 						"track" 	=> $thisTrack,
-						"thumbnail"	=> $searchresult['snippet']['default']['url']
+						"thumbnail"	=> $searchresult['snippet']['thumbnails']['default']['url']
 					);
 				}
 			}

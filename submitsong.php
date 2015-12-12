@@ -50,9 +50,11 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 						for($i = 3; $i < count($splitTitle); $i++)
 							$thisTrack .= " - " . $splitTitle[$i];
 					
-					$videos[] = new array("url" => "https://youtube.com/watch?v=" . $searchresult['id']['videoId'],
-					"artist" => $splitTitle[0],
-					"track" => $thisTrack);
+					$videos[] = array(
+						"url" => "https://youtube.com/watch?v=" . $searchresult['id']['videoId'],
+						"artist" => $splitTitle[0],
+						"track" => $thisTrack
+					);
 				}
 			}
 			

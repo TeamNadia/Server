@@ -12,7 +12,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']))
 	if ($result->num_rows > 0)
 	{
 		$row = $result->fetch_array(MYSQLI_ASSOC);
-		if ($row['pin'] == $pin)
+		if (strtolower($row['pin']) == strtolower($pin))
 		{
 			echo "SUCCESS";
 		}

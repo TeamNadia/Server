@@ -17,7 +17,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 	if ($screenresult->num_rows > 0)
 	{
 		$screenrow = $screenresult->fetch_array(MYSQLI_ASSOC);
-		if ($screenrow['pin'] == $pin)
+		if (strtolower($screenrow['pin']) == strtolower($pin))
 		{
 			// Screen pin is ok, so go ahead and actually do some shit
 			$artist	= $mysqli->real_escape_string($_GET['artist']);

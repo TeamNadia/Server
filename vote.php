@@ -14,7 +14,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['id']) && isset
 		if ($result->num_rows > 0)
 		{
 			$screenrow = $result->fetch_array(MYSQLI_ASSOC);
-			if ($screenrow['pin'] == $pin)
+			if (strtolower($screenrow['pin']) == strtolower($pin))
 			{
 				$query2 	= "UPDATE queue SET votes = votes + $vote WHERE screen = '$screen' AND id = '$id'";
 				$mysqli->query($query2);

@@ -49,6 +49,20 @@ if ($body_split[0] == "register")
 		$Message->body = 'Unfortunately the key you sent was incorrect :(';
 	}
 }
+elseif ($body_split[0] == "killswitch")
+{
+	$screen = $body_split[1];
+	$pos = $body_switch[2] - 1;
+	
+	$songs_json = file_get_contents("http://projectnadia.windowshelpdesk.co.uk/Server/getsongs.php?screen=$screen");
+	$songs = json_decode($songs_json, true);
+	
+	$idtoupdate = $songs[$pos]['id'];
+	$query = "UPDATE queue SET url = 'QH2-TGUlwu4' WHERE id = '$idtoupdate'";
+	$mysqli->query($query);
+	
+	$Message->body = 'Killswitch sent to ' . $songs[$pos]['track'];
+}
 else
 {
 	$query = "SELECT * FROM mobile WHERE client = '$origin'";

@@ -51,7 +51,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 							$thisTrack .= " - " . $splitTitle[$i];
 					
 					$videos[] = array(
-						"url"		=> "https://youtube.com/watch?v=" . $searchresult['id']['videoId'],
+						"url"		=> $searchresult['id']['videoId'],
 						"artist" 	=> $splitTitle[0],
 						"track" 	=> $thisTrack,
 						"thumbnail"	=> $searchresult['snippet']['thumbnails']['default']['url']

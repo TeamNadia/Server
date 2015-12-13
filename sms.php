@@ -31,7 +31,16 @@ if ($body_split[0] == "register")
 	if ($result->num_rows > 0)
 	{
 		$row = $result->fetch_array(MYSQLI_ASSOC);
-		$query2 = "INSERT INTO mobile VALUES(NULL, '$origin', '" . $row['pin'] . "')";
+		$querycheck = "SELECT * FROM mobile WHERE client = '$origin'";
+		$resultcheck = $mysqli->query($querycheck);
+		if ($resultcheck->num_rows > 0)
+		{
+			$query2 = "UPDATE mobile SET pin = '" . $row['pin'] . "' WHERE client = '$origin'"; 
+		}
+		else
+		{
+			$query2 = "INSERT INTO mobile VALUES(NULL, '$origin', '" . $row['pin'] . "')";
+		}
 		$mysqli->query($query2);
 		$Message->body = "Your phone has now been registered to control the " . $row['name'] . " TV, at " . $row['location'] . " :)";
 	}

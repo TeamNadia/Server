@@ -3,7 +3,7 @@ require_once("include/config.inc.php");
 if (isset($_GET['screen']) && isset($_GET['pin']))
 {
 	$mysqli	= new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-	$screen	= $myqsli->real_escape_string($_GET['screen']);
+	$screen	= $mysqli->real_escape_string($_GET['screen']);
 	$pin	= $mysqli->real_escape_string($_GET['pin']);
 	
 	$query	= "SELECT * FROM screens WHERE id = '$screen'";

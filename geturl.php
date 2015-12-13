@@ -7,7 +7,7 @@ if (isset($_GET['screen']) && isset($_GET['id']))
 	$screen	= $mysqli->real_escape_string($_GET['screen']);
 	$songid	= $mysqli->real_escape_string($_GET['id']);
 	
-	$query	= "SELECT * FROM queue WHERE id = '$id' AND screen = '$screen'";
+	$query	= "SELECT * FROM queue WHERE id = '$songid' AND screen = '$screen'";
 	$result	= $mysqli->query($query);
 	
 	if ($result->num_rows > 0)

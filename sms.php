@@ -2,7 +2,7 @@
 require_once("include/config.inc.php");
 require_once("messagebird-rest-api/autoload.php");
 
-define(MESSAGEBIRD_KEY, "live_sgORFbRAkHBJnUcTrGAtzlQCi");
+define("MESSAGEBIRD_KEY", "live_sgORFbRAkHBJnUcTrGAtzlQCi");
 
 $mysqli = new myqsli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 

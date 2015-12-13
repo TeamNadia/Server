@@ -17,6 +17,6 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC))
 	);
 }
 
-$output = json_encode($screens);
+$output = json_encode($screens, JSON_NUMERIC_CHECK);
 
 echo $output;

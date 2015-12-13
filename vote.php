@@ -1,6 +1,6 @@
 <?php
 require_once("include/config.inc.php");
-if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['id']) && isset("vote"))
+if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['id']) && isset($_GET['vote']))
 {
 	if ($_GET['vote'] == "1" || $_GET['vote'] == "-1")
 	{

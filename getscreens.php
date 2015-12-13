@@ -9,12 +9,19 @@ $result	= $mysqli->query($query);
 
 while ($row = $result->fetch_array(MYSQLI_ASSOC))
 {
-	$screens[] = array
+	$screenData = array
 	(
 		"id"		=> $row['id'],
 		"name"		=> $row['name'],
 		"location"	=> $row['location']
 	);
+	
+	if (isset($_GET['showpin']) && $_GET['showpin'] == "1")
+	{
+		$screenData['pin'] = $row['pin'];
+	}
+	
+	$screens[] = $screenData;
 }
 
 $output = json_encode($screens, JSON_NUMERIC_CHECK);

@@ -43,7 +43,7 @@ if ($body_split[0] == "register")
 	{
 		$query2 = "INSERT INTO mobile VALUES(NULL, '$origin', '" . $s['pin'] . "')";
 		$mysqli->query($query2);
-		$Message->body = "Your phone has now been registered to control the " . $s['name'] " TV, at " . $s['location'] . " :)";
+		$Message->body = "Your phone has now been registered to control the " . $s['name'] . " TV, at " . $s['location'] . " :)";
 	}
 	$MessageResult = $MessageBird->messages->create($Message);}
 	

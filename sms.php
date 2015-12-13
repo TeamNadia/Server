@@ -74,7 +74,7 @@ else
 		}
 		
 		$artist = "";
-		int i;
+		$i = 0;
 		for ($i = 1; $i < count($body_split); $i++)
 		{
 			$artist.= " " . $body_split[$i];

@@ -32,7 +32,7 @@ if ($body_split[0] == "register")
 	$MessageBird = new \MessageBird\Client(MESSAGEBIRD_KEY);
 	
 	$Message             = new \MessageBird\Objects\Message();
-	$Message->originator = 'Your Music TV';
+	$Message->originator = 'YourMusicTV';
 	$Message->recipients = array($_GET['originator']);
 	
 	if ($screen == null)

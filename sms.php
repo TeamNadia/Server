@@ -19,7 +19,7 @@ if ($body_split[0] == "register")
 {
 	$screen = null;
 	
-	$query = "SELECT * FROM screens WHERE '" . $body_split[1] . "'";
+	$query = "SELECT * FROM screens WHERE pin = '" . $body_split[1] . "'";
 	$result = $mysqli->query($query);
 	
 	$MessageBird = new \MessageBird\Client(MESSAGEBIRD_KEY);

@@ -15,18 +15,18 @@ $body_split = explode(" ", $body);
 $body_split[0] = strtolower($body_split[0]);
 $body_split[1] = strtolower($mysqli->real_escape_string($body_split[1]));
 
+$MessageBird = new \MessageBird\Client(MESSAGEBIRD_KEY);
+		
+$Message             = new \MessageBird\Objects\Message();
+$Message->originator = 'YourMusicTV';
+$Message->recipients = array($_GET['originator']);
+
 if ($body_split[0] == "register")
 {
 	$screen = null;
 	
 	$query = "SELECT * FROM screens WHERE pin = '" . $body_split[1] . "'";
 	$result = $mysqli->query($query);
-	
-	$MessageBird = new \MessageBird\Client(MESSAGEBIRD_KEY);
-		
-	$Message             = new \MessageBird\Objects\Message();
-	$Message->originator = 'YourMusicTV';
-	$Message->recipients = array($_GET['originator']);
 	
 	if ($result->num_rows > 0)
 	{
@@ -48,7 +48,56 @@ if ($body_split[0] == "register")
 	{
 		$Message->body = 'Unfortunately the key you sent was incorrect :(';
 	}
-	$MessageResult = $MessageBird->messages->create($Message);
 }
+else
+{
+	$query = "SELECT * FROM mobile WHERE client = '$origin'";
+	$result = $mysqli->query($query);
+	if ($result->num_rows > 0)
+	{
+		$row = $result->fetch_array(MYSQLI_ASSOC);
+		$screens = array();
+		$query2 = "SELECT * FROM screens";
+		$result2 = $mysqli->query($query2);
+		while ($row2 = $result2->fetch_array(MYSQLI_ASSOC))
+		{
+			$screens[] = $row2;
+		}
+		$screen = null;
+		
+		foreach ($screens as $s)
+		{
+			if ($s['pin'] == $row['pin'])
+			{
+				$screen = $s;
+			}
+		}
+		
+		$artist = "";
+		int i;
+		for ($i = 1; $i < count($body_split); $i++)
+		{
+			$artist.= " " . $body_split[$i];
+		}
+		
+		$songresult = file_get_contents("http://projectnadia.windowshelpdesk.co.uk/Server/submitsong.php?screen=" . $s['id']
+			. "&pin=" . $s['pin'] . "&artist=" . $artist);
+		
+		if ($songresult == "SUCCESS")
+		{
+			$Message->body = 'Your request was successful! Thank you! :)';
+		}
+		else
+		{
+			$Message->body = 'Unfortunately, that request failed. :( Please try again. If issues persist please contact us.';
+		}
+	}
+	else
+	{
+		$Message->body = 'Sorry, you must register with a pin before you can use this service. Simply test register followed by the TV pin to register. Thank you!';
+	}
+}
+
+$MessageResult = $MessageBird->messages->create($Message);
 
 http_response_code(200);

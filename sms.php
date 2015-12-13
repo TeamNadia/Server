@@ -45,7 +45,7 @@ if ($body_split[0] == "register")
 		$mysqli->query($query2);
 		$Message->body = "Your phone has now been registered to control the " . $s['name'] . " TV, at " . $s['location'] . " :)";
 	}
-	$MessageResult = $MessageBird->messages->create($Message);}
+	$MessageResult = $MessageBird->messages->create($Message);
 	
 }
 

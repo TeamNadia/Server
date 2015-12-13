@@ -2,3 +2,6 @@
 	path = google-api-php-client
 	url = https://github.com/google/google-api-php-client.git
 	branch = v1-master
+[submodule "php-rest-api"]
+	path = messagebird-rest-api
+	url = https://github.com/messagebird/php-rest-api

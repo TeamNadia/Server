@@ -9,7 +9,7 @@ $result	= $mysqli->query($query);
 
 while ($row = $result->fetch_array(MYSQLI_ASSOC))
 {
-	$screens[$row['id']] = array
+	$screens[(int)$row['id']] = array
 	(
 		"id"		=> $row['id'],
 		"name"		=> $row['name'],

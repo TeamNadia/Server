@@ -4,7 +4,7 @@ require_once("messagebird-rest-api/autoload.php");
 
 define("MESSAGEBIRD_KEY", "live_sgORFbRAkHBJnUcTrGAtzlQCi");
 
-$mysqli = new myqsli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 $origin = $mysqli->real_escape_string($_GET['originator']);
 $recipient = $_GET['recipient'];

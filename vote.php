@@ -8,7 +8,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['id']) && isset
 		$screen	= $mysqli->real_escape_string($_GET['screen']);
 		$pin	= $mysqli->real_escape_string($_GET['pin']);
 		$id		= $mysqli->real_escape_string($_GET['id']);
-		
+		$vote	= $mysqli->real_escape_string($_GET['vote']);
 		$query	= "SELECT * FROM screens WHERE id = '$id'";
 		$result = $mysqli->query($query);
 		if ($result->num_rows > 0)
@@ -16,7 +16,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['id']) && isset
 			$screenrow = $result->fetch_array(MYSQLI_ASSOC);
 			if ($screenrow['pin'] == $pin)
 			{
-				$query2 	= "UPDATE queue SET votes = votes + 1 WHERE screen = '$screen' AND id = '$id'";
+				$query2 	= "UPDATE queue SET votes = votes + $vote WHERE screen = '$screen' AND id = '$id'";
 				$mysqli->query($query2);
 				echo "SUCCESS";
 			}

@@ -9,7 +9,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['id']) && isset
 		$pin	= $mysqli->real_escape_string($_GET['pin']);
 		$id		= $mysqli->real_escape_string($_GET['id']);
 		$vote	= $mysqli->real_escape_string($_GET['vote']);
-		$query	= "SELECT * FROM screens WHERE id = '$id'";
+		$query	= "SELECT * FROM screens WHERE id = '$screen'";
 		$result = $mysqli->query($query);
 		if ($result->num_rows > 0)
 		{

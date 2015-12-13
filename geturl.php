@@ -20,7 +20,7 @@ if (isset($_GET['screen']) && isset($_GET['id']))
 	}
 	else
 	{
-		echo "EVERYTHINGFAIL";
+		echo "BADSONGORSCREENFAIL";
 	}
 }
 else

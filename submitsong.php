@@ -27,7 +27,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 			
 			$searchquery = $artist;
 			if ($track != "")
-				$searchgquery .= " - " . $track;
+				$searchquery .= " - " . $track;
 				
 			// Connect up to YouTube	
 			$googleclient = new Google_Client();

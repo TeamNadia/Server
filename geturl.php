@@ -15,7 +15,7 @@ if (isset($_GET['screen']) && isset($_GET['id']))
 		$row = $result->fetch_array(MYSQLI_ASSOC);
 		$url = $row['url'];
 		echo $url;
-		$query2 = "DELETE FROM queue WHERE id = '$id'";
+		$query2 = "DELETE FROM queue WHERE id = '$songid'";
 		$mysqli->query($query2);
 	}
 	else

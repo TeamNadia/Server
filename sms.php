@@ -11,43 +11,35 @@ $recipient = $_GET['recipient'];
 
 $body = $_GET['body'];
 
-$screens_json = file_get_contents("http://projectnadia.windowshelpdesk.co.uk/Server/getscreens.php?showpin=1");
-$screens = json_decode($screens_json, true);
-
 $body_split = explode(" ", $body);
 $body_split[0] = strtolower($body_split[0]);
+$body_split[1] = strtolower($mysqli->real_escape_string($body_split[1]));
 
 if ($body_split[0] == "register")
 {
 	$screen = null;
-
-	foreach ($screens as $s)
-	{
-		if ($body_split[1] == $s['pin'])
-		{
-			$screen = $s;
-		}
-	}
+	
+	$query = "SELECT * FROM screens WHERE '" . $body_split[1] . "'";
+	$result = $mysqli->query($query);
 	
 	$MessageBird = new \MessageBird\Client(MESSAGEBIRD_KEY);
-	
+		
 	$Message             = new \MessageBird\Objects\Message();
 	$Message->originator = 'YourMusicTV';
 	$Message->recipients = array($_GET['originator']);
 	
-	if ($screen == null)
+	if ($result->num_rows > 0)
 	{
-		$Message->body = 'Unfortunately the key you sent was incorrect :(';
+		$row = $result->fetch_array(MYSQLI_ASSOC);
+		$query2 = "INSERT INTO mobile VALUES(NULL, '$origin', '" . $row['pin'] . "')";
+		$mysqli->query($query2);
+		$Message->body = "Your phone has now been registered to control the " . $row['name'] . " TV, at " . $row['location'] . " :)";
 	}
 	else
 	{
-		$query2 = "INSERT INTO mobile VALUES(NULL, '$origin', '" . $s['pin'] . "')";
-		$mysqli->query($query2);
-		$Message->body = "Your phone has now been registered to control the " . $s['name'] . " TV, at " . $s['location'] . " :)";
+		$Message->body = 'Unfortunately the key you sent was incorrect :(';
 	}
 	$MessageResult = $MessageBird->messages->create($Message);
-	
 }
-
 
 http_response_code(200);

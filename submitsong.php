@@ -22,6 +22,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 			// Screen pin is ok, so go ahead and actually do some shit
 			$artist	= $mysqli->real_escape_string($_GET['artist']);
 			$track = "";
+			$searchquery = $artist;
 			if (isset($_GET['track']))
 			{
 				$track = $mysqli->real_escape_string($_GET['track']);
@@ -44,7 +45,7 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 				if ($searchresult['id']['kind'] == 'youtube#video')
 				{
 					$splitTitle = explode(" - ", $searchresult['snippet']['title']);
-					$thisTrack = "";
+					$thisTrack = $searchresult['snippet']['title'];
 					if (count($splitTitle) > 1)
 					{
 						$thisTrack = $splitTitle[1];

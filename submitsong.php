@@ -23,12 +23,11 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 			$artist	= $mysqli->real_escape_string($_GET['artist']);
 			$track = "";
 			if (isset($_GET['track']))
+			{
 				$track = $mysqli->real_escape_string($_GET['track']);
-			
-			$searchquery = $artist;
-			if ($track != "")
 				$searchquery .= " - " . $track;
-				
+			}
+			
 			// Connect up to YouTube	
 			$googleclient = new Google_Client();
 			$googleclient->setDeveloperKey(YOUTUBE_KEY);

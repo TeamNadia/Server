@@ -44,11 +44,14 @@ if (isset($_GET['screen']) && isset($_GET['pin']) && isset($_GET['artist']))
 				if ($searchresult['id']['kind'] == 'youtube#video')
 				{
 					$splitTitle = explode(" - ", $searchresult['snippet']['title']);
-					$thisTrack = $splitTitle[1];
-					if (count($splitTitle > 2))
-						for($i = 3; $i < count($splitTitle); $i++)
-							$thisTrack .= " - " . $splitTitle[$i];
-					
+					$thisTrack = "";
+					if (count($splitTitle) > 1)
+					{
+						$thisTrack = $splitTitle[1];
+						if (count($splitTitle > 2))
+							for($i = 3; $i < count($splitTitle); $i++)
+								$thisTrack .= " - " . $splitTitle[$i];
+					}
 					$videos[] = array(
 						"url"		=> $searchresult['id']['videoId'],
 						"artist" 	=> $splitTitle[0],
